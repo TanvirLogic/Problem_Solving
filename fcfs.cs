@@ -26,6 +26,22 @@ class Program
             Console.Write($"P{i + 1}: ");
             burst[i] = int.Parse(Console.ReadLine());
         }
+
+        
+         // Sort based on Arrival Time (FCFS Rule)
+        for (int i = 0; i < n - 1; i++)
+        {
+            for (int j = i + 1; j < n; j++)
+            {
+                if (arrival[i] > arrival[j])
+                {
+                    (arrival[i], arrival[j]) = (arrival[j], arrival[i]);
+                    (burst[i], burst[j]) = (burst[j], burst[i]);
+                    (pid[i], pid[j]) = (pid[j], pid[i]);
+                }
+            }
+        }
+        
         
         int currentTime = 0;
         for (int i = 0; i < n; i++)
