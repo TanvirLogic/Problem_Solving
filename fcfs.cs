@@ -7,12 +7,18 @@ class Program
         Console.Write("Enter number of processes: ");
         int n = int.Parse(Console.ReadLine());
         
+        int[] pid = new int[n];
         int[] arrival = new int[n];
         int[] burst = new int[n];
         int[] completion = new int[n];
         int[] turnaround = new int[n];
         int[] waiting = new int[n];
         
+        for (int i = 0; i < n; i++)
+        {
+            pid[i] = i + 1; // Assign process IDs
+        }
+
         Console.WriteLine("\nEnter Arrival Time:");
         for (int i = 0; i < n; i++)
         {
@@ -27,8 +33,7 @@ class Program
             burst[i] = int.Parse(Console.ReadLine());
         }
 
-        
-         // Sort based on Arrival Time (FCFS Rule)
+        // 🔹 Sort based on Arrival Time (FCFS Rule)
         for (int i = 0; i < n - 1; i++)
         {
             for (int j = i + 1; j < n; j++)
@@ -41,7 +46,6 @@ class Program
                 }
             }
         }
-        
         
         int currentTime = 0;
         for (int i = 0; i < n; i++)
@@ -61,7 +65,7 @@ class Program
         double totalWT = 0, totalTAT = 0;
         for (int i = 0; i < n; i++)
         {
-            Console.WriteLine($"P{i + 1}       {arrival[i]}       {burst[i]}       {completion[i]}          {turnaround[i]}         {waiting[i]}");
+            Console.WriteLine($"P{pid[i]}       {arrival[i]}       {burst[i]}       {completion[i]}          {turnaround[i]}         {waiting[i]}");
             totalWT += waiting[i];
             totalTAT += turnaround[i];
         }
@@ -69,4 +73,4 @@ class Program
         Console.WriteLine($"\nAverage Waiting Time: {totalWT / n:F2}");
         Console.WriteLine($"Average Turnaround Time: {totalTAT / n:F2}");
     }
-} 
+}
